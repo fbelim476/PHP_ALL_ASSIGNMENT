@@ -1,0 +1,197 @@
+			SQL Assignment
+
+		task - 1
+	
+1)Get First_Name from employee table using alias name “Employee Name”. 
+
+Ans-> 
+	SELECT first_name FROM employee;
+
+2)Get FIRST_NAME, Joining year, Joining Month and Joining Date from employee table. 
+
+Ans -> 
+	SELECT first_name,joining_date FROM employee;
+
+3) Get all employee details from the employee table order by First Name Ascending And Salary descending? 
+
+Ans -> 
+	SELECT * FROM employee
+	ORDER BY first_name ASC,
+	salary DESC;
+
+4) Get employee details from employee table whose first name contains „o‟. 
+
+Ans -> 
+	SELECT * 
+	FROM employee
+	WHERE first_name LIKE '%o%';
+
+5) Get employee details from employee table whose joining month is “January”. 
+
+Ans -> 
+	SELECT * 
+	FROM employee
+	WHERE joining_date LIKE '%2013-01-01%';
+
+6) Get department, total salary with respect to a department from employee table Order By total salary descending. 
+
+Ans -> 
+	* total salary syntax
+
+		select department, sum(salary) as total_salary
+		from employee;
+	
+	* tota salary descending order by syntax\
+	
+		select department, sum(salary) as total_salary
+		from employee
+		group by department
+		order by total_salary desc;
+
+7) Get department wise maximum salary from employee table order by salary ascending? 
+
+Ans -> 
+	SELECT department, max(salary) as max_salary
+	FROM employee
+	GROUP BY department
+	ORDER BY max_salary ASC;	
+
+8) Select first_name, incentive amount from employee and incentives table for those Employees who have incentives and incentive amount greater than 3000
+
+Ans ->
+
+SELECT e.first_name, i.incentive_amount
+FROM employee e
+INNER JOIN incentives i ON e.employee_id = i.employee_id
+WHERE i.incentive_amount > 3000;
+
+
+
+
+9) Select 2nd Highest salary from employee table. 
+
+Ans -> 
+	SELECT Salary 
+	FROM Employee 
+	ORDER BY Salary DESC 
+	LIMIT 2;	
+
+10)Select first_name, incentive amount from employee and incentives table for all Employees who got incentives using left join. 
+
+Ans ->
+	SELECT employee.first_name, incentive.incentive_amt
+	FROM employee
+	LEFT JOIN incentive ON employee.em_id = incentive.em_id;
+
+11) Create View OF Employee table in which store first name, last name and salary only. 
+
+Ans ->
+	CREATE VIEW employee_view AS
+	SELECT first_name, last_name, salary
+	FROM employee;
+
+
+12) Create Procedure to find out department wise highest salary.
+
+Ans ->
+
+13) Create after Insert trigger on Employee table which insert records in view table.
+
+Ans ->
+
+
+			SQL Assignment
+
+		task - 2
+
+1) All orders for more than $1000.
+
+Ans ->
+
+SELECT *
+FROM orders
+WHERE order_amount > 1000;
+
+2) Names and cities of all salespeople in London with commission above 0.10.
+
+Ans -> 
+
+SELECT s.name, s.city
+FROM salespeople s
+JOIN sales sa ON s.salesperson_id = sa.salesperson_id
+WHERE s.city = 'London' AND sa.commission_rate > 0.10;
+
+3) All salespeople either in Barcelona or in London.
+
+Ans ->
+
+SELECT *
+FROM salespeople
+WHERE city = 'Barcelona' OR city = 'London';
+
+4) All salespeople with commission between 0.10 and 0.12. (Boundary values should be excluded).
+
+Ans ->
+
+SELECT *
+FROM salespeople
+WHERE commission_rate > 0.10 AND commission_rate < 0.12;
+
+5) All customers with NULL values in city column.
+
+Ans ->
+
+SELECT *
+FROM customers
+WHERE city IS NULL;
+
+6) All orders taken on Oct 3Rd and Oct 4th 1994.
+
+Ans ->
+
+SELECT *
+FROM orders
+WHERE order_date BETWEEN '1994-10-03' AND '1994-10-04';
+
+7) All customers serviced by peel or Motika.
+
+Ans ->
+
+SELECT *
+FROM customers
+WHERE service_rep IN ('Peel', 'Motika');
+
+8) All customers whose names begin with a letter from A to B
+
+Ans ->
+
+SELECT *
+FROM customers
+WHERE customer_name LIKE 'A%' OR customer_name LIKE 'B%';
+
+9) All customers excluding those with rating <= 100 unless they are located in Rome.
+
+Ans ->
+
+SELECT *
+FROM customers
+WHERE (rating > 100) OR (rating <= 100 AND city = 'Rome');
+
+10) All orders except those with 0 or NULL value in amt field.
+
+Ans ->
+
+SELECT *
+FROM orders
+WHERE amt IS NOT NULL AND amt <> 0;
+
+11) Count the number of salespeople currently listing orders in the order table.
+
+Ans ->
+
+SELECT COUNT(DISTINCT s.salesperson_id) AS num_salespeople
+FROM salespeople s
+INNER JOIN orders o ON s.salesperson_id = o.salesperson_id;
+
+
+
